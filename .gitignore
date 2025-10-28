@@ -28126,4 +28126,43 @@ Player Control & Physics/UserSettings/EditorUserSettings.asset
 Player Control & Physics/UserSettings/Layouts/default-6000.dwlt
 Player Control & Physics/UserSettings/Search.index
 Player Control & Physics/UserSettings/Search.settings
+# Unity generated folders
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+UserSettings/
+Logs/
+MemoryCaptures/
+
+# Packages cache and auto-generated stuff
+[Pp]ackageCache/
+[Bb]uildReports/
+[Rr]ecordings/
+
+# OS and IDE junk
+.DS_Store
+*.user
+*.csproj
+*.sln
+*.unityproj
+*.pidb
+*.suo
+*.tmp
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Crash and build logs
+sysinfo.txt
+*.stackdump
+*.log
+
+# Rider / Visual Studio caches
+.idea/
+.vs/
 *.asset
