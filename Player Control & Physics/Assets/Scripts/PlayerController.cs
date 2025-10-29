@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController character_controller;
     private float downward_velocity; //stores the velocity of the player going... well down.
 
+    public Transform Respawn;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,6 +34,14 @@ public class PlayerController : MonoBehaviour
         velocity = new Vector3(horizontal, 0f, vertical) * movementSpeed;
         velocity = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z)) * velocity;
 
+
+        if (transform.position.y < -10f)
+        {
+            character_controller.enabled = false;
+            transform.position = Respawn.position;
+            downward_velocity = 0f;
+            character_controller.enabled = true;
+        }
         if (character_controller.isGrounded) //Was the player touching the ground?
         {
             downward_velocity = -2f; //locks the player to the ground, good for slopes.

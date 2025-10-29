@@ -132,7 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   movementSpeed: 5
   gravityMultiplier: 2
-  JumpForce: 20
+  JumpForce: 10
+  Respawn: {fileID: 2582362132502998095, guid: 575dbc570fc14ad48b452660b397dfd8, type: 3}
 --- !u!54 &8072775999874407125
 Rigidbody:
   m_ObjectHideFlags: 0
