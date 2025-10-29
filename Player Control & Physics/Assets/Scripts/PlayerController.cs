@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         character_controller = GetComponent<CharacterController>();
+        Camera.main.GetComponent<CameraController>().Target = transform;
     }
 
     // Update is called once per frame
@@ -28,8 +29,8 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         float move_amount = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
-
         velocity = new Vector3(horizontal, 0f, vertical) * movementSpeed;
+        velocity = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z)) * velocity;
 
         if (character_controller.isGrounded) //Was the player touching the ground?
         {
