@@ -27,18 +27,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
+        horizontal = Input.GetAxis("Horizontal"); //Input manager... inputs for Horizontal and vertical, this is your standard WASD if left unchanged.
         vertical = Input.GetAxis("Vertical");
-        float move_amount = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
+        float move_amount = Mathf.Abs(horizontal) + Mathf.Abs(vertical); 
         velocity = new Vector3(horizontal, 0f, vertical) * movementSpeed;
-        velocity = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z)) * velocity;
+        velocity = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z)) * velocity; //Okay, ill try my best to explain this, this line of code is to keep the player always moving based on the camera
+        //So without this line the player if they held "W" would just go up along the X axis for example, not ideal, however this line of code makes it so that we are changing the velocity vector by the cameras horizontal facing
+        //Relative movement I believe in the term for it?
 
 
-        if (transform.position.y < -10f)
+        if (transform.position.y < -10f) //If the player goes below Y-10 then we respawn the player at the "Respawn" tag object
         {
-            character_controller.enabled = false;
+            character_controller.enabled = false; //To actually have the object return back to its "respawn" we have to turn off player control temporarily then re-enable it later.
             transform.position = Respawn.position;
-            downward_velocity = 0f;
+            downward_velocity = 0f; //stops all downward velocity, so they dont go flying off when they respawn.
             character_controller.enabled = true;
         }
         if (character_controller.isGrounded) //Was the player touching the ground?
@@ -64,13 +66,6 @@ public class PlayerController : MonoBehaviour
         {
             var target_rotation = Quaternion.LookRotation(new Vector3(velocity.x, 0f, velocity.z));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, target_rotation, 500f * Time.deltaTime); //This is just to make sure our character turns with our movement
-        }
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Coin"))
-        {
-
         }
     }
 }

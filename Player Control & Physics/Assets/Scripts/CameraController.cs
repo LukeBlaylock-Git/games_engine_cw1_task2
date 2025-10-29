@@ -25,14 +25,14 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        Distance -= scroll * ZoomSpeed;
-        Distance = Mathf.Clamp(Distance, MinZoom, MaxZoom); // For zooming in and out the camera
+        float scroll = Input.GetAxis("Mouse ScrollWheel"); //Gets the Input_Manager... input, uses it for our scroll variable.
+        Distance -= scroll * ZoomSpeed; //Distance subtract scroll * ZoomSpeed result
+        Distance = Mathf.Clamp(Distance, MinZoom, MaxZoom); //The clamp is to keep our camera between a Min and Max, hence why Min zoom and Max zoom are here, distance updates, min and max stay static.
 
-        Rotation += new Vector2(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X") * RotationSpeed);
+        Rotation += new Vector2(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X") * RotationSpeed); //simply put Rotation moves the camera up and down depending on the mouse input, which is multplied for the rotation speed.
         Rotation.x = Mathf.Clamp(Rotation.x, MinVertical, MaxVerticalAngle);
 
-        var TargetRotation = Quaternion.Euler(Rotation); //Euler confuses me a fair bit, but from what I understand it simplifies a float to three decimal points? ill just have to ask.
+        var TargetRotation = Quaternion.Euler(Rotation); //Bit confusing and this probably isnt accurate, but this takes Vector2 angles, converts them into a Quaternion, which is what unity uses to represent movement in a 3D space (kinda)
 
         transform.position = Target.position - TargetRotation * new Vector3(0f, 0f, Distance);
         transform.rotation = TargetRotation;
